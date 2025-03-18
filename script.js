@@ -55,7 +55,7 @@ function drawWhiteLayer() {
 // Listen for mobile touchstart event to reveal squares
 canvas.addEventListener('touchstart', (event) => {
     if (window.innerWidth <= 768) {  // Check for mobile screen size
-        event.preventDefault();
+        // event.preventDefault();
         progressiveReveal();
     }
 }, { passive: false });
