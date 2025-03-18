@@ -31,7 +31,7 @@ function progressiveReveal() {
 // Event listener for mobile touch (only triggers once)
 canvas.addEventListener('touchstart', (event) => {
     if (!hasRevealed) {  // Check if the reveal effect has already been triggered
-        event.preventDefault();
+        // event.preventDefault();
         progressiveReveal();
         hasRevealed = true;  // Set the flag to true to prevent further reveals
     }
