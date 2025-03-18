@@ -56,9 +56,9 @@ body {
   }
   #coding { top: 8vh; left: 10vw; }
   #bubble-tea { top: 85vh; left:10vw; }
-  #cherry-blossam { top: 35vh; left: 15vw; }
+  #cherry-blossam { top: 35vh; left: 10vw; }
   #butterfly { top: 5vh; left: 85vw; }
-  #light-bulb { top: 75vh; left: 45vw; }
+  #light-bulb { top: 81vh; left: 45vw; }
   #music { top: 50vh; left: 5vw; }
   #camera { top: 82vh; left: 80vw; }
   #hourglass { top: 45vh; left: 80vw; }
@@ -79,7 +79,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background: url('https://unsplash.com/photos/a-cell-phone-sitting-on-top-of-a-gray-blanket-jSAk8iug_B0') center/cover no-repeat; */
   transform: translateY(0);
   transition: transform 0.2s ease-out;
 }
@@ -89,8 +88,6 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  /* background: linear-gradient(45deg, #ff6f61, #6a5acd); */
-  /* background: linear-gradient(45deg, #ff6f61, #ff66b2, #00c9a7, #6a5acd); */
   background: linear-gradient(135deg, #64FFDA, #BB86FC);
   overflow: hidden;
 }
@@ -179,7 +176,6 @@ section {
 }
 
 section h2 {
-  font-size: 3em;
   margin-bottom: 20px;
 }
 
@@ -189,81 +185,6 @@ section p {
   margin: 0 auto 20px;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 1264px) {
-
-  .header-image {
-    width: 250px;
-    height: 250px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2.5em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h3 {
-    text-align: center;
-    font-size: 1em;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .visible-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .header-image {
-    width: 250px;
-    height: 250px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h3 {
-    font-size: 1em;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .visible-container {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-
 /* About Section */
 #about {
   padding: 50px 20px;
@@ -271,10 +192,6 @@ section p {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
-}
-
-#about h2{
-  font-size: 3.0rem;
 }
 
 #about.visible {
@@ -302,14 +219,8 @@ section p {
 /* Skills Section */
 #skills {
   text-align: center;
-  padding: 70px 0;
- /* background: linear-gradient(135deg, #1a1a2e, #16213e);*/
+  /* padding: 70px 0; */
   color: black;
-}
-
-#skills h2{
-  font-size: 3.0rem;
-  padding: 20px;
 }
 
 /* Skills Container */
@@ -405,8 +316,6 @@ section p {
 
 .tab-block button.active {
   background: linear-gradient(135deg, #64FFDA, #BB86FC);
-  /* color: white; */
-  /* border-color: #FF6F61; */
 }
 
 /* Separator Line between Tabs and Content */
@@ -628,8 +537,80 @@ section p {
   text-decoration: underline;
 }
 
+
 /* Responsive Design */
-@media (max-width: 768px) {
+@media screen and (max-width: 1264px) {
+
+  .header-image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h3 {
+    text-align: center;
+    font-size: 1em;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .visible-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h3 {
+    font-size: 1em;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .visible-container {
+    width: 100%;
+    height: 100%;
+  }
+
   .contact-container {
     flex-direction: column;
     align-items: center;
@@ -640,5 +621,71 @@ section p {
   }
 }
 
+@media screen and (max-width: 380px) {
 
+  section{
+    padding: 80px 20px;
+  }
 
+  section p{
+    font-size: 12px;
+  }
+
+  .header-image {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2em;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h3 {
+    font-size: 1em;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  h2{
+    font-size: 2em;
+  }
+
+  #about p{
+    font-size: 12px;
+  }
+
+  .visible-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .tab-block button{
+    font-size: 10px;
+  }
+
+  .content-card{
+    font-size: 10px;
+  }
+
+  .tab-box{
+    width: 350px;
+  }
+
+  .flip-card {
+    background-color: transparent;
+    width: 250px;
+    height: 300px;
+    perspective: 1000px;
+  }
+}
