@@ -1,5 +1,80 @@
+// const canvas = document.getElementById('revealCanvas');
+// const ctx = canvas.getContext('2d');
+
+// // Function for Progressive Reveal (Squares) - for mobile view
+// function progressiveReveal() {
+//     const revealInterval = 50; // Time in milliseconds between each reveal step
+//     const revealSize = 80; // Size of each square reveal step (both width and height)
+//     let currentX = 0;
+//     let currentY = 0;
+
+//     const revealStep = () => {
+//         ctx.globalCompositeOperation = 'destination-out';
+//         ctx.fillStyle = 'white';
+//         ctx.fillRect(currentX, currentY, revealSize, revealSize);
+
+//         currentX += revealSize;
+//         if (currentX > canvas.width) {
+//             currentX = 0;
+//             currentY += revealSize;
+//         }
+
+//         if (currentY <= canvas.height) {
+//             setTimeout(revealStep, revealInterval);
+//         }
+//     };
+
+//     revealStep();
+// }
+
+// // Function for Erasing on Mouse Move - for desktop view
+// function eraseOnMouseMove(event) {
+//     const rect = canvas.getBoundingClientRect();
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
+
+//     ctx.globalCompositeOperation = 'destination-out';
+//     ctx.beginPath();
+//     ctx.arc(x, y, 80, 0, Math.PI * 2);
+//     ctx.fill();
+// }
+
+// // Resize canvas on window resize
+// function resizeCanvas() {
+//     canvas.width = window.innerWidth;
+//     canvas.height = document.querySelector('.reveal-container').offsetHeight;
+//     drawWhiteLayer();
+// }
+
+// function drawWhiteLayer() {
+//     ctx.globalCompositeOperation = 'source-over';
+//     ctx.fillStyle = 'white';
+//     ctx.fillRect(0, 0, canvas.width, canvas.height);
+// }
+
+// // Listen for mobile touchstart event to reveal squares
+// canvas.addEventListener('touchstart', (event) => {
+//     if (window.innerWidth <= 768) {  // Check for mobile screen size
+//         // event.preventDefault();
+//         progressiveReveal();
+//     }
+// }, { passive: false });
+
+// // Listen for mousemove event to erase on desktop
+// if (window.innerWidth > 768) {  // Check for desktop screen size
+//     canvas.addEventListener('mousemove', eraseOnMouseMove);
+// }
+
+// // Run on page load
+// resizeCanvas();
+// window.addEventListener('resize', resizeCanvas);
+
+
 const canvas = document.getElementById('revealCanvas');
 const ctx = canvas.getContext('2d');
+
+// Flag to ensure progressive reveal happens only once
+let hasRevealed = false;
 
 // Function for Progressive Reveal (Squares) - for mobile view
 function progressiveReveal() {
@@ -54,11 +129,11 @@ function drawWhiteLayer() {
 
 // Listen for mobile touchstart event to reveal squares
 canvas.addEventListener('touchstart', (event) => {
-    if (window.innerWidth <= 768) {  // Check for mobile screen size
-        event.preventDefault();
+    if (window.innerWidth <= 768 && !hasRevealed) {  // Check for mobile screen size and reveal flag
         progressiveReveal();
+        hasRevealed = true;  // Set flag to true to prevent further reveals
     }
-}, { passive: false });
+}, { passive: true }); // Using passive: true to improve scrolling performance
 
 // Listen for mousemove event to erase on desktop
 if (window.innerWidth > 768) {  // Check for desktop screen size
@@ -68,6 +143,12 @@ if (window.innerWidth > 768) {  // Check for desktop screen size
 // Run on page load
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
+
+// Optional: Reset the `hasRevealed` flag when the page reloads or is refreshed
+window.addEventListener('beforeunload', () => {
+    hasRevealed = false;
+});
+
 
 // Parallax Effect
 window.addEventListener('scroll', function() {
