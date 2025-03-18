@@ -1,11 +1,10 @@
 const canvas = document.getElementById('revealCanvas');
 const ctx = canvas.getContext('2d');
 
-let hasRevealed = false;  // Flag to track if the reveal has already been triggered
-
+// Function for Progressive Reveal (Squares) - for mobile view
 function progressiveReveal() {
     const revealInterval = 50; // Time in milliseconds between each reveal step
-    const revealSize = 60; // Size of each square reveal step (both width and height)
+    const revealSize = 80; // Size of each square reveal step (both width and height)
     let currentX = 0;
     let currentY = 0;
 
@@ -28,16 +27,7 @@ function progressiveReveal() {
     revealStep();
 }
 
-// Event listener for mobile touch (only triggers once)
-canvas.addEventListener('touchstart', (event) => {
-    if (!hasRevealed) {  // Check if the reveal effect has already been triggered
-        // event.preventDefault();
-        progressiveReveal();
-        hasRevealed = true;  // Set the flag to true to prevent further reveals
-    }
-}, { passive: false });
-
-// Ensure the effect doesn't trigger on desktop using mouse
+// Function for Erasing on Mouse Move - for desktop view
 function eraseOnMouseMove(event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
@@ -48,56 +38,6 @@ function eraseOnMouseMove(event) {
     ctx.arc(x, y, 80, 0, Math.PI * 2);
     ctx.fill();
 }
-
-// Event listener for desktop (mouse movement for erasing)
-canvas.addEventListener('mousemove', eraseOnMouseMove);
-
-// Optional: Reset the `hasRevealed` flag when the page reloads or is refreshed
-window.addEventListener('beforeunload', () => {
-    hasRevealed = false;
-});
-
-
-// const canvas = document.getElementById('revealCanvas');
-// const ctx = canvas.getContext('2d');
-
-// // Function for Progressive Reveal (Squares) - for mobile view
-// function progressiveReveal() {
-//     const revealInterval = 50; // Time in milliseconds between each reveal step
-//     const revealSize = 80; // Size of each square reveal step (both width and height)
-//     let currentX = 0;
-//     let currentY = 0;
-
-//     const revealStep = () => {
-//         ctx.globalCompositeOperation = 'destination-out';
-//         ctx.fillStyle = 'white';
-//         ctx.fillRect(currentX, currentY, revealSize, revealSize);
-
-//         currentX += revealSize;
-//         if (currentX > canvas.width) {
-//             currentX = 0;
-//             currentY += revealSize;
-//         }
-
-//         if (currentY <= canvas.height) {
-//             setTimeout(revealStep, revealInterval);
-//         }
-//     };
-
-//     revealStep();
-// }
-
-// Function for Erasing on Mouse Move - for desktop view
-// function eraseOnMouseMove(event) {
-//     const rect = canvas.getBoundingClientRect();
-//     const x = event.clientX - rect.left;
-//     const y = event.clientY - rect.top;
-
-//     ctx.globalCompositeOperation = 'destination-out';
-//     ctx.beginPath();
-//     ctx.arc(x, y, 80, 0, Math.PI * 2);
-//     ctx.fill();
-// }
 
 // Resize canvas on window resize
 function resizeCanvas() {
@@ -112,18 +52,18 @@ function drawWhiteLayer() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// // Listen for mobile touchstart event to reveal squares
-// canvas.addEventListener('touchstart', (event) => {
-//     if (window.innerWidth <= 768) {  // Check for mobile screen size
-//         event.preventDefault();
-//         progressiveReveal();
-//     }
-// }, { passive: false });
+// Listen for mobile touchstart event to reveal squares
+canvas.addEventListener('touchstart', (event) => {
+    if (window.innerWidth <= 768) {  // Check for mobile screen size
+        event.preventDefault();
+        progressiveReveal();
+    }
+}, { passive: false });
 
 // Listen for mousemove event to erase on desktop
-// if (window.innerWidth > 768) {  // Check for desktop screen size
-//     canvas.addEventListener('mousemove', eraseOnMouseMove);
-// }
+if (window.innerWidth > 768) {  // Check for desktop screen size
+    canvas.addEventListener('mousemove', eraseOnMouseMove);
+}
 
 // Run on page load
 resizeCanvas();
