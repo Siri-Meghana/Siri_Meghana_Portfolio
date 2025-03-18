@@ -57,12 +57,17 @@ function progressiveReveal() {
 }
 
 canvas.addEventListener('touchstart', (event) => {
-    event.preventDefault();
     if (!isRevealing) { // Check if the reveal effect is already in progress
         isRevealing = true; // Set flag to true to indicate that the reveal effect is running
         progressiveReveal();
+        event.preventDefault(); // Prevent default only if reveal effect is triggered
     }
 }, { passive: false });
+
+canvas.addEventListener('touchend', () => {
+    // Allow scrolling after touch interaction completes
+    isRevealing = false;
+});
 
 
 // Function for Erasing on Mouse Move - for desktop view
