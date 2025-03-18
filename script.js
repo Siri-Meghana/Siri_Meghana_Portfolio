@@ -1,6 +1,66 @@
 const canvas = document.getElementById('revealCanvas');
 const ctx = canvas.getContext('2d');
 
+let hasRevealed = false;  // Flag to track if the reveal has already been triggered
+
+function progressiveReveal() {
+    const revealInterval = 50; // Time in milliseconds between each reveal step
+    const revealSize = 60; // Size of each square reveal step (both width and height)
+    let currentX = 0;
+    let currentY = 0;
+
+    const revealStep = () => {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'white';
+        ctx.fillRect(currentX, currentY, revealSize, revealSize);
+
+        currentX += revealSize;
+        if (currentX > canvas.width) {
+            currentX = 0;
+            currentY += revealSize;
+        }
+
+        if (currentY <= canvas.height) {
+            setTimeout(revealStep, revealInterval);
+        }
+    };
+
+    revealStep();
+}
+
+// Event listener for mobile touch (only triggers once)
+canvas.addEventListener('touchstart', (event) => {
+    if (!hasRevealed) {  // Check if the reveal effect has already been triggered
+        event.preventDefault();
+        progressiveReveal();
+        hasRevealed = true;  // Set the flag to true to prevent further reveals
+    }
+}, { passive: false });
+
+// Ensure the effect doesn't trigger on desktop using mouse
+function eraseOnMouseMove(event) {
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, 80, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+// Event listener for desktop (mouse movement for erasing)
+canvas.addEventListener('mousemove', eraseOnMouseMove);
+
+// Optional: Reset the `hasRevealed` flag when the page reloads or is refreshed
+window.addEventListener('beforeunload', () => {
+    hasRevealed = false;
+});
+
+
+// const canvas = document.getElementById('revealCanvas');
+// const ctx = canvas.getContext('2d');
+
 // // Function for Progressive Reveal (Squares) - for mobile view
 // function progressiveReveal() {
 //     const revealInterval = 50; // Time in milliseconds between each reveal step
@@ -27,60 +87,17 @@ const ctx = canvas.getContext('2d');
 //     revealStep();
 // }
 
-let isRevealing = false; // Flag to track if the reveal effect is running
-
-function progressiveReveal() {
-    const revealInterval = 50; // Time between each reveal step
-    const revealSize = 60; // Size of each square reveal step (both width and height)
-    let currentX = 0;
-    let currentY = 0;
-
-    const revealStep = () => {
-        if (currentY > canvas.height) return; // Stop the loop if the entire canvas is revealed
-
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.fillStyle = 'white';
-        ctx.fillRect(currentX, currentY, revealSize, revealSize);
-
-        currentX += revealSize;
-        if (currentX >= canvas.width) {
-            currentX = 0;
-            currentY += revealSize;
-        }
-
-        setTimeout(revealStep, revealInterval); // Continue the reveal effect at set intervals
-    };
-
-    revealStep(); // Start the reveal effect
-}
-
-canvas.addEventListener('touchstart', (event) => {
-    if (!isRevealing) { // Check if the reveal effect is not running
-        isRevealing = true; // Mark that the effect is now running
-        progressiveReveal(); // Trigger the reveal effect
-        event.preventDefault(); // Prevent default scroll behavior while effect is running
-    }
-}, { passive: false });
-
-canvas.addEventListener('touchend', () => {
-    // After touch ends, allow scrolling and reset the reveal flag
-    setTimeout(() => {
-        isRevealing = false; // Reset flag after reveal effect completes
-    }, 200); // Slight delay to ensure the reveal completes before allowing scrolling
-});
-
-
 // Function for Erasing on Mouse Move - for desktop view
-function eraseOnMouseMove(event) {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+// function eraseOnMouseMove(event) {
+//     const rect = canvas.getBoundingClientRect();
+//     const x = event.clientX - rect.left;
+//     const y = event.clientY - rect.top;
 
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.beginPath();
-    ctx.arc(x, y, 80, 0, Math.PI * 2);
-    ctx.fill();
-}
+//     ctx.globalCompositeOperation = 'destination-out';
+//     ctx.beginPath();
+//     ctx.arc(x, y, 80, 0, Math.PI * 2);
+//     ctx.fill();
+// }
 
 // Resize canvas on window resize
 function resizeCanvas() {
@@ -95,7 +112,7 @@ function drawWhiteLayer() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// Listen for mobile touchstart event to reveal squares
+// // Listen for mobile touchstart event to reveal squares
 // canvas.addEventListener('touchstart', (event) => {
 //     if (window.innerWidth <= 768) {  // Check for mobile screen size
 //         event.preventDefault();
@@ -104,9 +121,9 @@ function drawWhiteLayer() {
 // }, { passive: false });
 
 // Listen for mousemove event to erase on desktop
-if (window.innerWidth > 768) {  // Check for desktop screen size
-    canvas.addEventListener('mousemove', eraseOnMouseMove);
-}
+// if (window.innerWidth > 768) {  // Check for desktop screen size
+//     canvas.addEventListener('mousemove', eraseOnMouseMove);
+// }
 
 // Run on page load
 resizeCanvas();
