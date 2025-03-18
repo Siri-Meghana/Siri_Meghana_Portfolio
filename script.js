@@ -27,46 +27,46 @@ const ctx = canvas.getContext('2d');
 //     revealStep();
 // }
 
-let isRevealing = false; // Flag to track if the reveal effect is in progress
+let isRevealing = false; // Flag to track if the reveal effect is running
 
 function progressiveReveal() {
-    const revealInterval = 50; // Time in milliseconds between each reveal step
+    const revealInterval = 50; // Time between each reveal step
     const revealSize = 60; // Size of each square reveal step (both width and height)
     let currentX = 0;
     let currentY = 0;
 
     const revealStep = () => {
+        if (currentY > canvas.height) return; // Stop the loop if the entire canvas is revealed
+
         ctx.globalCompositeOperation = 'destination-out';
         ctx.fillStyle = 'white';
         ctx.fillRect(currentX, currentY, revealSize, revealSize);
 
         currentX += revealSize;
-        if (currentX > canvas.width) {
+        if (currentX >= canvas.width) {
             currentX = 0;
             currentY += revealSize;
         }
 
-        if (currentY <= canvas.height) {
-            setTimeout(revealStep, revealInterval);
-        } else {
-            isRevealing = false; // Reset the flag after the reveal is done
-        }
+        setTimeout(revealStep, revealInterval); // Continue the reveal effect at set intervals
     };
 
-    revealStep();
+    revealStep(); // Start the reveal effect
 }
 
 canvas.addEventListener('touchstart', (event) => {
-    if (!isRevealing) { // Check if the reveal effect is already in progress
-        isRevealing = true; // Set flag to true to indicate that the reveal effect is running
-        progressiveReveal();
-        event.preventDefault(); // Prevent default only if reveal effect is triggered
+    if (!isRevealing) { // Check if the reveal effect is not running
+        isRevealing = true; // Mark that the effect is now running
+        progressiveReveal(); // Trigger the reveal effect
+        event.preventDefault(); // Prevent default scroll behavior while effect is running
     }
 }, { passive: false });
 
 canvas.addEventListener('touchend', () => {
-    // Allow scrolling after touch interaction completes
-    isRevealing = false;
+    // After touch ends, allow scrolling and reset the reveal flag
+    setTimeout(() => {
+        isRevealing = false; // Reset flag after reveal effect completes
+    }, 200); // Slight delay to ensure the reveal completes before allowing scrolling
 });
 
 
