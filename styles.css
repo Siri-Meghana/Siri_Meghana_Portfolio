@@ -635,7 +635,7 @@ button{
   }
 
   .skills-container {
-    flex-direction: column; /* Stack skills vertically */
+    flex-direction: row;
     align-items: center;
   }
 
@@ -649,7 +649,7 @@ button{
   }
 
   .tab-block button {
-    font-size: 14px; /* Reduce button text size */
+    font-size: 10px;
     padding: 10px 15px;
   }
 
