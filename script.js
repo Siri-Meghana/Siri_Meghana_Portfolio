@@ -1,8 +1,13 @@
 const canvas = document.getElementById('revealCanvas');
 const ctx = canvas.getContext('2d');
 
+// Flag to check if progressive reveal has already been triggered
+let hasRevealed = false;
+
 // Function for Progressive Reveal (Squares) - for mobile view
 function progressiveReveal() {
+    if (hasRevealed) return; // Prevent the reveal if it's already triggered
+
     const revealInterval = 50; // Time in milliseconds between each reveal step
     const revealSize = 80; // Size of each square reveal step (both width and height)
     let currentX = 0;
@@ -25,6 +30,7 @@ function progressiveReveal() {
     };
 
     revealStep();
+    hasRevealed = true; // Mark as revealed after triggering
 }
 
 // Function for Erasing on Mouse Move - for desktop view
@@ -55,7 +61,8 @@ function drawWhiteLayer() {
 // Listen for mobile touchstart event to reveal squares
 canvas.addEventListener('touchstart', (event) => {
     if (window.innerWidth <= 768) {  // Check for mobile screen size
-        // event.preventDefault();
+        // Prevent default behavior to avoid multiple triggers
+        event.preventDefault();
         progressiveReveal();
     }
 }, { passive: false });
@@ -64,7 +71,6 @@ canvas.addEventListener('touchstart', (event) => {
 if (window.innerWidth > 768) {  // Check for desktop screen size
     canvas.addEventListener('mousemove', eraseOnMouseMove);
 }
-
 // Run on page load
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
