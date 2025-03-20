@@ -40,7 +40,7 @@ function eraseOnMouseMove(event) {
     const y = event.clientY - rect.top;
 
     ctx.globalCompositeOperation = 'destination-out';
-    ctx.beginPath()
+    ctx.beginPath();
     ctx.arc(x, y, 80, 0, Math.PI * 2);
     ctx.fill();
 }
@@ -58,12 +58,12 @@ function drawWhiteLayer() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// Listen for mobile touchstart event to reveal squares
-canvas.addEventListener('touchstart', (event) => {
+// Listen for mobile touchstart event to trigger the reveal only once per page load
+window.addEventListener('load', () => {
     if (window.innerWidth <= 768 && !hasRevealed) {  // Check for mobile screen size and ensure it's not revealed
         progressiveReveal();
     }
-}, { passive: true }); // Set passive to true for better scrolling performance
+});
 
 // Listen for mousemove event to erase on desktop
 if (window.innerWidth > 768) {  // Check for desktop screen size
