@@ -99,13 +99,14 @@ body {
   top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
 .contact a{
   color: black;
 }
 
-/* Ensures text remains visible and unchanged */
+/* text remains visible */
 .text-container {
   width: 100%;
   height: 100%;
@@ -146,7 +147,7 @@ h3{
   pointer-events: none;
 }
 
-p {
+.text-container .p {
   font-size: 1.5em;
   margin-top: 10px;
 } 
@@ -179,12 +180,6 @@ section h2 {
   margin-bottom: 20px;
 }
 
-section p {
-  font-size: 1.2em;
-  max-width: 800px;
-  margin: 0 auto 20px;
-}
-
 /* About Section */
 #about {
   padding: 50px 20px;
@@ -200,13 +195,11 @@ section p {
 }
 
 #about p {
-  /* font-family: 'Poppins', sans-serif; */
   text-align: justify;
   max-width: 1200px;
   margin: 20px auto;
   font-size: 1.2rem;
   line-height: 1.8;
-  /* color: #E0E0E0; */
 }
 
 /* Show Sections on Scroll */
@@ -219,11 +212,9 @@ section p {
 /* Skills Section */
 #skills {
   text-align: center;
-  /* padding: 70px 0; */
   color: black;
 }
 
-/* Skills Container */
 .skills-container {
   display: flex;
   justify-content: center;
@@ -232,7 +223,6 @@ section p {
   margin-top: 30px;
 }
 
-/* Skill Card */
 .skill-card {
   width: 150px;
   height: 150px;
@@ -248,26 +238,22 @@ section p {
   perspective: 1000px;
 }
 
-/* Improved Hover Effects */
 .skill-card:hover {
   box-shadow: 0 0px 40px rgba(150, 97, 235, 0.5); /* Soft glowing effect */
   transition: box-shadow 0.3s ease-in-out;
 }
 
-/* Skill Icons */
 .skill-card img {
   width: 50px;
   height: 50px;
 }
 
-/* Skill Text */
 .skill-card p {
   margin-top: 10px;
   font-size: 14px;
 }
 
 /*Experience Section */
-
 .experience-section {
   text-align: center;
   padding: 70px 0;
@@ -279,9 +265,8 @@ section p {
   padding: 20px;
 }
 
-/* Tab Box */
 .tab-box {
-  border: 1px solid #ccc; /* Outer box border */
+  border: 1px solid #ccc;
   border-radius: 10px;
   max-width: 1200px;
   margin: 0 auto;
@@ -290,11 +275,14 @@ section p {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Block Tabs (Horizontal) */
 .tab-block {
   display: flex;
   justify-content: space-around;
-  background-color: #fff; /* Background color for tabs section */
+  background-color: #fff; 
+}
+
+button{
+  font-family: 'Quicksand', sans-serif;
 }
 
 .tab-block button {
@@ -324,7 +312,6 @@ section p {
   margin: 0; /* No margin */
 }
 
-/* Block Content (Cards) */
 .tab-content-container {
   display: flex;
   flex-direction: column;
@@ -337,10 +324,9 @@ section p {
 
 .tab-content.active {
   display: block;
-  animation: fadeIn 0.5s ease-in-out; /* Smooth transition for content */
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Content Cards */
 .content-card {
   background-color: #fff;
   padding: 20px;
@@ -377,7 +363,7 @@ section p {
 }
 
 
-/* Container for all projects */
+/* projects section*/
 .projects-container {
   display: flex;
   flex-wrap: wrap;
@@ -385,7 +371,6 @@ section p {
   gap: 50px;
 }
 
-/* Flip card wrapper */
 .flip-card {
   background-color: transparent;
   width: 300px;
@@ -393,7 +378,10 @@ section p {
   perspective: 1000px;
 }
 
-/* Flip card inner container */
+.flip-card h4{
+  font-size: 20px;
+}
+
 .flip-card-inner {
   position: relative;
   width: 100%;
@@ -403,24 +391,21 @@ section p {
   transform-style: preserve-3d;
 }
 
-/* Flip card hover effect */
 .flip-card:hover .flip-card-inner {
   transform: rotateY(180deg);
 }
 
-/* Front and back sides of the card */
 .flip-card-front,
 .flip-card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border: 1px solid #f1f1f1;
+  border: 2px solid #f1f1f1;
   border-radius: 10px;
   overflow: hidden;
 }
 
-/* Front side styling */
 .flip-card-front {
   background-color: #fff;
   display: flex;
@@ -441,7 +426,6 @@ section p {
   font-size: 1.2em;
 }
 
-/* Back side styling */
 .flip-card-back {
   background: linear-gradient(135deg, #64FFDA, #BB86FC);
   color: white;
@@ -475,15 +459,66 @@ section p {
   background-color: #ddd;
 }
 
+/*Education section*/
+.education-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 80%; 
+  margin: auto;
+}
 
-/* General styles for the contact section */
+.education {
+  background-color: #f0efef;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  transition: 0.4s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.education:hover {
+  background-color: #ccc;
+  border-left: 5px solid #BB86FC;
+}
+
+.education.active{
+  background: linear-gradient(135deg, #64FFDA, #BB86FC);
+  border-left: 5px solid #BB86FC;
+}
+
+.panel {
+  text-align: justify;
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
+.panel h4{
+  font-size: 20px;
+  border-bottom: 1px solid;
+}
+
+.symbol {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Contact section */
 .contact-section {
   padding: 80px 20px;
   background: linear-gradient(135deg, #64FFDA, #BB86FC);
-  font-family: 'Arial', sans-serif;
 }
 
-/* Container for the contact section */
 .contact-container {
   display: flex;
   justify-content: center;
@@ -491,7 +526,6 @@ section p {
   margin: 0 auto;
 }
 
-/* Contact information */
 .contact-info {
   width: 100%;
   max-width: 600px;
