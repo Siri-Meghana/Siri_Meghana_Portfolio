@@ -130,5 +130,24 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.tablinks').click(); // Trigger the first tab on page load
 });
 
+let education = document.querySelectorAll(".education");
+
+education.forEach((education) => {
+    education.addEventListener("click", function () {
+        let panel = this.nextElementSibling;
+        let symbol = this.querySelector(".symbol");
+
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+            symbol.textContent = "+";
+            this.classList.remove("active");
+        } else {
+            panel.style.display = "block";
+            symbol.textContent = "−";
+            this.classList.add("active");
+        }
+    });
+});
+
 window.addEventListener('scroll', revealSections);
 revealSections(); // Run on page load
