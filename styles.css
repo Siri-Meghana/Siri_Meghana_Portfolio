@@ -468,7 +468,7 @@ button{
 }
 
 /*Education section*/
-.education-container {
+/* .education-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -519,7 +519,7 @@ button{
 .symbol {
   font-size: 22px;
   font-weight: bold;
-}
+} */
 
 /* Contact section */
 .contact-section {
@@ -581,89 +581,8 @@ button{
 
 
 /* Responsive Design */
-@media screen and (max-width: 1264px) {
 
-  .header-image {
-    width: 250px;
-    height: 250px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2.5em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h3 {
-    text-align: center;
-    font-size: 1em;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .visible-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .header-image {
-    width: 250px;
-    height: 250px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h3 {
-    font-size: 1em;
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .visible-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  .contact-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-info {
-    width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
+@media (max-width: 768px) and (max-width: 480px) {
   body {
     font-size: 14px; /* Reduce font size for better readability */
   }
@@ -690,12 +609,12 @@ button{
   #coffee { top: 25vh; left: 90vw; }
 
   .contact {
-    top: 60%; /* Adjust contact positioning */
+    top: 55%; /* Adjust contact positioning */
   }
 
   h1 {
     font-size: 2em; /* Reduce heading size */
-    top: 50%;
+    top: 52%;
   }
 
   h2 {
@@ -703,12 +622,16 @@ button{
   }
 
   h3 {
-    font-size: 1.8em;
-    top: 55%;
+    font-size: 1em;
+    top: 65%;
   }
 
   .text-container {
     top: 45%;
+  }
+
+  #about p{
+    font-size: 12px;
   }
 
   .skills-container {
@@ -734,69 +657,6 @@ button{
     padding: 10px;
   }
 
-  .flip-card h4{
-    font-size: 14px;
-  }
-
-  section {
-    padding: 50px 10px; /* Reduce padding for mobile */
-  }
-}
-
-
-@media screen and (max-width: 380px) {
-
-  section{
-    padding: 80px 20px;
-  }
-
-  section p{
-    font-size: 12px;
-  }
-
-  .header-image {
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2em;
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h3 {
-    font-size: 1em;
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  h2{
-    font-size: 2em;
-  }
-
-  #about p{
-    font-size: 12px;
-  }
-
-  .visible-container {
-    width: 100%;
-    height: 100%;
-  }
-
-  .tab-block button{
-    font-size: 10px;
-  }
-
   .content-card{
     font-size: 10px;
   }
@@ -805,10 +665,11 @@ button{
     width: 350px;
   }
 
-  .flip-card {
-    background-color: transparent;
-    width: 250px;
-    height: 300px;
-    perspective: 1000px;
+  .flip-card h4{
+    font-size: 14px;
+  }
+
+  section {
+    padding: 50px 10px; /* Reduce padding for mobile */
   }
 }
