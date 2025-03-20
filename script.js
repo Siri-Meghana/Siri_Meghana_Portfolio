@@ -1,7 +1,7 @@
 const canvas = document.getElementById('revealCanvas');
 const ctx = canvas.getContext('2d');
 
-// Flag to check if progressive reveal has already been triggered
+// Flag to ensure reveal effect happens only once
 let hasRevealed = false;
 
 // Function for Progressive Reveal (Squares) - for mobile view
@@ -30,7 +30,7 @@ function progressiveReveal() {
     };
 
     revealStep();
-    hasRevealed = true; // Mark as revealed after triggering
+    hasRevealed = true; // Mark as revealed to prevent re-triggering
 }
 
 // Function for Erasing on Mouse Move - for desktop view
@@ -45,33 +45,38 @@ function eraseOnMouseMove(event) {
     ctx.fill();
 }
 
-// Resize canvas on window resize
+// Resize canvas on window resize without resetting reveal
 function resizeCanvas() {
+    const prevImage = ctx.getImageData(0, 0, canvas.width, canvas.height); // Save the current state
     canvas.width = window.innerWidth;
     canvas.height = document.querySelector('.reveal-container').offsetHeight;
-    drawWhiteLayer();
+    ctx.putImageData(prevImage, 0, 0); // Restore the state
 }
 
+// Draw initial white layer only once
 function drawWhiteLayer() {
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (!hasRevealed) { // Draw only if reveal hasn't happened
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'white';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
 }
 
-// Listen for mobile touchstart event to reveal squares
-canvas.addEventListener('touchstart', (event) => {
-    if (window.innerWidth <= 768) {  // Check for mobile screen size
+// Listen for mobile touchstart event to reveal squares (without preventDefault to allow scrolling)
+canvas.addEventListener('touchstart', () => {
+    if (window.innerWidth <= 768) { // Check for mobile screen size
         progressiveReveal();
     }
-}, { passive: false });
+}, { passive: true }); // Allow scrolling
 
 // Listen for mousemove event to erase on desktop
-if (window.innerWidth > 768) {  // Check for desktop screen size
+if (window.innerWidth > 768) { // Check for desktop screen size
     canvas.addEventListener('mousemove', eraseOnMouseMove);
 }
 
-// Run on page load
+// Initial setup
 resizeCanvas();
+drawWhiteLayer();
 window.addEventListener('resize', resizeCanvas);
 
 // Parallax Effect
