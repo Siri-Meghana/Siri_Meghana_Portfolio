@@ -58,18 +58,17 @@ function drawWhiteLayer() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
-// Listen for mobile touchstart event to trigger the reveal only once per page load
-window.addEventListener('load', () => {
-    if (window.innerWidth <= 768 && !hasRevealed) {  // Check for mobile screen size and ensure it's not revealed
+// Listen for mobile touchstart event to reveal squares
+canvas.addEventListener('touchstart', (event) => {
+    if (window.innerWidth <= 768) {  // Check for mobile screen size
         progressiveReveal();
     }
-});
+}, { passive: false });
 
 // Listen for mousemove event to erase on desktop
 if (window.innerWidth > 768) {  // Check for desktop screen size
     canvas.addEventListener('mousemove', eraseOnMouseMove);
 }
-
 
 // Run on page load
 resizeCanvas();
