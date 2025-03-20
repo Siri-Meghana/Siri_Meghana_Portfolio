@@ -6,6 +6,10 @@ body {
   scroll-behavior: smooth;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .visible-container{
   position: relative;
   width: 100%;
@@ -81,6 +85,10 @@ body {
   height: 100%;
   transform: translateY(0);
   transition: transform 0.2s ease-out;
+}
+
+.parallax-container, .reveal-container {
+  min-height: 100vh;
 }
 
 /* Reveal Effect */
@@ -654,6 +662,87 @@ button{
     width: 90%;
   }
 }
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; /* Reduce font size for better readability */
+  }
+
+  .header-image {
+    width: 200px; /* Reduce size for smaller screens */
+    height: 200px;
+    top: 25%;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  #coding { top: 8vh; left: 10vw; }
+  #bubble-tea { top: 85vh; left: 10vw; }
+  #cherry-blossam { top: 35vh; left: 10vw; }
+  #butterfly { top: 5vh; left: 85vw; }
+  #light-bulb { top: 81vh; left: 45vw; }
+  #music { top: 50vh; left: 5vw; }
+  #camera { top: 82vh; left: 80vw; }
+  #hourglass { top: 45vh; left: 80vw; }
+  #coffee { top: 25vh; left: 90vw; }
+
+  .contact {
+    top: 60%; /* Adjust contact positioning */
+  }
+
+  h1 {
+    font-size: 2em; /* Reduce heading size */
+    top: 50%;
+  }
+
+  h2 {
+    font-size: 2.5em;
+  }
+
+  h3 {
+    font-size: 1.8em;
+    top: 55%;
+  }
+
+  .text-container {
+    top: 45%;
+  }
+
+  .skills-container {
+    flex-direction: column; /* Stack skills vertically */
+    align-items: center;
+  }
+
+  .skill-card {
+    width: 120px; 
+    height: 120px; 
+  }
+
+  .experience-section {
+    padding: 50px 0;
+  }
+
+  .tab-block button {
+    font-size: 14px; /* Reduce button text size */
+    padding: 10px 15px;
+  }
+
+  .tab-content-container {
+    padding: 10px;
+  }
+
+  .flip-card h4{
+    font-size: 14px;
+  }
+
+  section {
+    padding: 50px 10px; /* Reduce padding for mobile */
+  }
+}
+
 
 @media screen and (max-width: 380px) {
 
